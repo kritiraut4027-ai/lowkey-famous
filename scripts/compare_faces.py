@@ -14,17 +14,24 @@ app.prepare(ctx_id=0)
 
 image_path = "test_images/Alia.jpg"
 image = cv2.imread(image_path)
+
+if image is None:
+   print("Image could not be loaded")
+   print("please upload valid image")
+   exit()
 #detect the image
 faces = app.get(image)
 if len(faces) == 0:
    print("No face detected!")
    exit()
 
-
-print("Face detected succesfully!")
+if len(faces)>1:
+   print("Please upload image containing one face")
+   exit()
 
 #generate the embedding
 user_embedding = faces[0].embedding
+print("faces detected successfully!")
 print(user_embedding.shape)
 
 embedding_folder = "embedding"
@@ -55,6 +62,10 @@ if similarity>highest_similarity:
 
 percentage = highest_similarity * 100
 
+if percentage <40:
+   print("\n No close match found")
+   exit()
+
 print("\n..............")
 print(f"Your Hamshakal is :{best_match}")
 print(f"Match Percentage:{percentage:2f}%")
@@ -64,6 +75,7 @@ print(celeb_image_path)
 celeb_image = cv2.imread(celeb_image_path)
 
 if celeb_image is None:
+   
    print("Celebrity image is not found!")
 
 else:
