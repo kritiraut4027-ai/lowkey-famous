@@ -1,0 +1,9 @@
+numpy
+opencv-python
+pillow
+insightface
+onnxruntime
+fastapi
+uvicorn
+pymongo
+scikit-learn

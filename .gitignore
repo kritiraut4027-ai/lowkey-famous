@@ -1,0 +1,16 @@
+#virtual environment
+venv/
+#python cache
+__pycache__/
+*.pyc
+#dataset files
+dataset/
+#embedding
+embeddings/
+venv/
+#environment varaible
+.environment
+#vs code setting
+.vscode/
+#jupyter cache
+.ipynb_checkpoints/
