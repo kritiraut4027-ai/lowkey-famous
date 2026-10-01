@@ -10,17 +10,26 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
     OPENBLAS_NUM_THREADS=1 \
     INSIGHTFACE_ROOT=/root/.insightface
 
-# Install minimal OS dependencies for ONNX Runtime (libgomp1 for OpenMP thread pool)
+# Install minimal OS dependencies for ONNX Runtime and OpenCV (headless & X11 fallback libraries)
 RUN apt-get update && apt-get install -y --no-install-recommends \
     libgomp1 \
+    libgl1 \
+    libglib2.0-0 \
+    libxcb1 \
+    libsm6 \
+    libxext6 \
     curl \
     && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
 
-# Install Python dependencies first for caching
+# Install Python dependencies first for caching.
+# InsightFace declares 'opencv-python' as a dependency which pulls in GUI binaries;
+# we uninstall opencv-python and force-reinstall opencv-python-headless to keep the container purely headless.
 COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt && \
+    (pip uninstall -y opencv-python || true) && \
+    pip install --no-cache-dir --force-reinstall opencv-python-headless==4.10.0.84
 
 # Pre-download InsightFace buffalo_l models during build to avoid cold-start runtime latency
 # Restrict allowed modules and delete unneeded 3D/landmark models and the zip to keep image small
