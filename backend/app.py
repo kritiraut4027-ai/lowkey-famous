@@ -1,3 +1,4 @@
+import gc
 import os
 import sys
 import uuid
@@ -19,6 +20,7 @@ os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
 from backend.compare_faces import (
     find_hamshakal,
+    get_face_analyzer,
     NoFaceDetectedError,
     MultipleFacesDetectedError,
     InvalidImageError,
@@ -27,6 +29,16 @@ from backend.compare_faces import (
     load_celebrity_embeddings,
     get_celebrity_image_map,
 )
+
+# Pre-warm model and dataset embeddings at startup so memory stays flat
+try:
+    print("[Hamshakal Finder] Pre-warming FaceAnalysis and celebrity embeddings...")
+    get_face_analyzer()
+    load_celebrity_embeddings()
+    get_celebrity_image_map()
+    print("[Hamshakal Finder] Startup warm-up complete.")
+except Exception as _init_err:
+    print(f"[Hamshakal Finder] Notice during startup warm-up: {_init_err}")
 
 app = Flask(
     __name__,
@@ -215,6 +227,7 @@ def upload_image():
                     os.remove(temp_image_path)
                 except OSError:
                     pass
+        gc.collect()
 
 
 if __name__ == "__main__":

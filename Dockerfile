@@ -55,5 +55,5 @@ EXPOSE 5000
 HEALTHCHECK --interval=30s --timeout=10s --start-period=40s --retries=3 \
     CMD curl -f http://localhost:${PORT}/health || exit 1
 
-# Start production server with 1 worker and 4 threads to strictly constrain memory under 512 MB
-CMD exec gunicorn --bind "0.0.0.0:${PORT}" --workers 1 --threads 4 --timeout 120 backend.app:app
+# Start production server with 1 worker and 2 threads to strictly constrain memory under 512 MB
+CMD exec gunicorn --bind "0.0.0.0:${PORT}" --workers 1 --threads 2 --timeout 120 backend.app:app

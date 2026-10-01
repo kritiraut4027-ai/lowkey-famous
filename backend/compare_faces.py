@@ -1,9 +1,33 @@
+import gc
 import json
 import os
 import cv2
 import numpy as np
 from pathlib import Path
 from typing import Dict, Tuple, Optional, List, Any
+
+# Configure ONNX Runtime for ultra-low memory footprint (<512 MB Free Tier)
+try:
+    import onnxruntime as ort
+
+    _orig_ort_init = ort.InferenceSession.__init__
+
+    def _lean_inference_session_init(self, path_or_bytes, *args, **kwargs):
+        sess_options = kwargs.get("sess_options")
+        if sess_options is None:
+            sess_options = ort.SessionOptions()
+        # Disable pre-allocated memory arena to prevent 200MB+ memory spikes on 512 MB limit
+        sess_options.enable_cpu_mem_arena = False
+        sess_options.enable_mem_pattern = False
+        sess_options.execution_mode = ort.ExecutionMode.ORT_SEQUENTIAL
+        sess_options.intra_op_num_threads = 1
+        sess_options.inter_op_num_threads = 1
+        kwargs["sess_options"] = sess_options
+        return _orig_ort_init(self, path_or_bytes, *args, **kwargs)
+
+    ort.InferenceSession.__init__ = _lean_inference_session_init
+except Exception:
+    pass
 
 # Define project roots
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
@@ -82,8 +106,8 @@ def get_face_analyzer():
             allowed_modules=["detection", "recognition"],
             providers=["CPUExecutionProvider"]
         )
-        # ctx_id=-1 forces CPU execution; det_size=None preserves exact alignment with pre-computed embeddings
-        analyzer.prepare(ctx_id=-1)
+        # Fixed det_size prevents redundant multi-scale detection sessions and high RAM consumption
+        analyzer.prepare(ctx_id=-1, det_size=(640, 640))
         _face_analyzer = analyzer
         return _face_analyzer
     except Exception as e:
@@ -266,6 +290,13 @@ def find_hamshakal(
     if image is None or image.size == 0:
         raise InvalidImageError("Image could not be loaded or is empty.")
 
+    # Downscale high-resolution images to max 1024px to prevent memory spikes on free tier
+    h, w = image.shape[:2]
+    max_dim = max(h, w)
+    if max_dim > 1024:
+        scale = 1024.0 / max_dim
+        image = cv2.resize(image, (int(w * scale), int(h * scale)), interpolation=cv2.INTER_AREA)
+
     # Get cached FaceAnalysis instance
     analyzer = get_face_analyzer()
 
@@ -318,5 +349,8 @@ def find_hamshakal(
         display_name = CELEBRITY_DISPLAY_NAMES[best_match_key]
     else:
         display_name = best_match_key.replace("_", " ").title()
+
+    # Free local tensor memory immediately
+    gc.collect()
 
     return best_match_key, percentage, celeb_filename, display_name, highest_similarity
