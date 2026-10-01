@@ -1,0 +1,311 @@
+{
+  "version": "1.0.0",
+  "description": "Hamshakal Finder Celebrity Metadata Registry",
+  "updated_at": "2026-09-25T17:58:25.162396+00:00",
+  "celebrities": {
+    "akshay": {
+      "celebrity_key": "akshay",
+      "celebrity_name": "Akshay Kumar",
+      "image_path": "dataset/akshay.jpg",
+      "image_filename": "akshay.jpg",
+      "embedding_path": "embedding/akshay.npy",
+      "status": "active",
+      "gender": "male",
+      "tags": [
+        "bollywood",
+        "actor"
+      ],
+      "created_at": "2026-09-25T00:00:00Z",
+      "last_embedded_at": "2026-09-25T17:58:25.162371+00:00"
+    },
+    "alia": {
+      "celebrity_key": "alia",
+      "celebrity_name": "Alia Bhatt",
+      "image_path": "dataset/alia.jpg",
+      "image_filename": "alia.jpg",
+      "embedding_path": "embedding/alia.npy",
+      "status": "active",
+      "gender": "female",
+      "tags": [
+        "bollywood",
+        "actress"
+      ],
+      "created_at": "2026-09-25T00:00:00Z",
+      "last_embedded_at": "2026-09-25T17:22:11.583670+00:00"
+    },
+    "anushka": {
+      "celebrity_key": "anushka",
+      "celebrity_name": "Anushka Sharma",
+      "image_path": "dataset/Anushka.jpg",
+      "image_filename": "Anushka.jpg",
+      "embedding_path": "embedding/anushka.npy",
+      "status": "active",
+      "gender": "female",
+      "tags": [
+        "bollywood",
+        "actress"
+      ],
+      "created_at": "2026-09-25T00:00:00Z",
+      "last_embedded_at": "2026-09-25T17:22:12.356515+00:00"
+    },
+    "dipika": {
+      "celebrity_key": "dipika",
+      "celebrity_name": "Deepika Padukone",
+      "image_path": "dataset/dipika.jpg",
+      "image_filename": "dipika.jpg",
+      "embedding_path": "embedding/dipika.npy",
+      "status": "active",
+      "gender": "female",
+      "tags": [
+        "bollywood",
+        "actress"
+      ],
+      "created_at": "2026-09-25T00:00:00Z",
+      "last_embedded_at": "2026-09-25T17:22:13.043676+00:00"
+    },
+    "madhuri": {
+      "celebrity_key": "madhuri",
+      "celebrity_name": "Madhuri Dixit",
+      "image_path": "dataset/madhuri.jpg",
+      "image_filename": "madhuri.jpg",
+      "embedding_path": "embedding/madhuri.npy",
+      "status": "active",
+      "gender": "female",
+      "tags": [
+        "bollywood",
+        "actress"
+      ],
+      "created_at": "2026-09-25T00:00:00Z",
+      "last_embedded_at": "2026-09-25T17:22:13.799347+00:00"
+    },
+    "salman": {
+      "celebrity_key": "salman",
+      "celebrity_name": "Salman Khan",
+      "image_path": "dataset/salman.jpg",
+      "image_filename": "salman.jpg",
+      "embedding_path": "embedding/salman.npy",
+      "status": "active",
+      "gender": "male",
+      "tags": [
+        "bollywood",
+        "actor"
+      ],
+      "created_at": "2026-09-25T00:00:00Z",
+      "last_embedded_at": "2026-09-25T17:22:14.404241+00:00"
+    },
+    "srk": {
+      "celebrity_key": "srk",
+      "celebrity_name": "Shah Rukh Khan",
+      "image_path": "dataset/srk.jpg",
+      "image_filename": "srk.jpg",
+      "embedding_path": "embedding/srk.npy",
+      "status": "active",
+      "gender": "male",
+      "tags": [
+        "bollywood",
+        "actor"
+      ],
+      "created_at": "2026-09-25T00:00:00Z",
+      "last_embedded_at": "2026-09-25T17:22:15.064499+00:00"
+    },
+    "varun": {
+      "celebrity_key": "varun",
+      "celebrity_name": "Varun Dhawan",
+      "image_path": "dataset/varun.jpg",
+      "image_filename": "varun.jpg",
+      "embedding_path": "embedding/varun.npy",
+      "status": "active",
+      "gender": "male",
+      "tags": [
+        "bollywood",
+        "actor"
+      ],
+      "created_at": "2026-09-25T00:00:00Z",
+      "last_embedded_at": "2026-09-25T17:22:15.773540+00:00"
+    },
+    "deepika_padukone": {
+      "celebrity_key": "deepika_padukone",
+      "celebrity_name": "Deepika Padukone",
+      "image_path": "dataset/celebrities/deepika_padukone/image.jpg",
+      "image_filename": "image.jpg",
+      "embedding_path": "embedding/deepika_padukone.npy",
+      "status": "active",
+      "gender": "female",
+      "tags": [
+        "bollywood",
+        "actress"
+      ],
+      "created_at": "2026-09-25T17:19:01.132863+00:00",
+      "last_embedded_at": "2026-09-25T17:22:16.418461+00:00"
+    },
+    "hrithik_roshan": {
+      "celebrity_key": "hrithik_roshan",
+      "celebrity_name": "Hrithik Roshan",
+      "image_path": "dataset/hrithik_roshan.jpg",
+      "image_filename": "hrithik_roshan.jpg",
+      "embedding_path": "embedding/hrithik_roshan.npy",
+      "status": "active",
+      "gender": "male",
+      "tags": [
+        "bollywood",
+        "actor"
+      ],
+      "created_at": "2026-09-25T17:54:53.318653+00:00"
+    },
+    "ranbir_kapoor": {
+      "celebrity_key": "ranbir_kapoor",
+      "celebrity_name": "Ranbir Kapoor",
+      "image_path": "dataset/ranbir_kapoor.jpg",
+      "image_filename": "ranbir_kapoor.jpg",
+      "embedding_path": "embedding/ranbir_kapoor.npy",
+      "status": "active",
+      "gender": "male",
+      "tags": [
+        "bollywood",
+        "actor"
+      ],
+      "created_at": "2026-09-25T17:55:35.155704+00:00"
+    },
+    "priyanka_chopra": {
+      "celebrity_key": "priyanka_chopra",
+      "celebrity_name": "Priyanka Chopra",
+      "image_path": "dataset/priyanka_chopra.jpg",
+      "image_filename": "priyanka_chopra.jpg",
+      "embedding_path": "embedding/priyanka_chopra.npy",
+      "status": "active",
+      "gender": "female",
+      "tags": [
+        "bollywood",
+        "hollywood",
+        "actress"
+      ],
+      "created_at": "2026-09-25T17:55:37.966194+00:00"
+    },
+    "katrina_kaif": {
+      "celebrity_key": "katrina_kaif",
+      "celebrity_name": "Katrina Kaif",
+      "image_path": "dataset/katrina_kaif.jpg",
+      "image_filename": "katrina_kaif.jpg",
+      "embedding_path": "embedding/katrina_kaif.npy",
+      "status": "active",
+      "gender": "female",
+      "tags": [
+        "bollywood",
+        "actress"
+      ],
+      "created_at": "2026-09-25T17:55:41.423188+00:00"
+    },
+    "ranveer_singh": {
+      "celebrity_key": "ranveer_singh",
+      "celebrity_name": "Ranveer Singh",
+      "image_path": "dataset/ranveer_singh.jpg",
+      "image_filename": "ranveer_singh.jpg",
+      "embedding_path": "embedding/ranveer_singh.npy",
+      "status": "active",
+      "gender": "male",
+      "tags": [
+        "bollywood",
+        "actor"
+      ],
+      "created_at": "2026-09-25T17:55:45.424904+00:00"
+    },
+    "kareena_kapoor": {
+      "celebrity_key": "kareena_kapoor",
+      "celebrity_name": "Kareena Kapoor",
+      "image_path": "dataset/kareena_kapoor.jpg",
+      "image_filename": "kareena_kapoor.jpg",
+      "embedding_path": "embedding/kareena_kapoor.npy",
+      "status": "active",
+      "gender": "female",
+      "tags": [
+        "bollywood",
+        "actress"
+      ],
+      "created_at": "2026-09-25T17:55:50.024263+00:00"
+    },
+    "amitabh_bachchan": {
+      "celebrity_key": "amitabh_bachchan",
+      "celebrity_name": "Amitabh Bachchan",
+      "image_path": "dataset/amitabh_bachchan.jpg",
+      "image_filename": "amitabh_bachchan.jpg",
+      "embedding_path": "embedding/amitabh_bachchan.npy",
+      "status": "active",
+      "gender": "male",
+      "tags": [
+        "bollywood",
+        "actor"
+      ],
+      "created_at": "2026-09-25T17:55:53.406383+00:00"
+    },
+    "aamir_khan": {
+      "celebrity_key": "aamir_khan",
+      "celebrity_name": "Aamir Khan",
+      "image_path": "dataset/aamir_khan.jpg",
+      "image_filename": "aamir_khan.jpg",
+      "embedding_path": "embedding/aamir_khan.npy",
+      "status": "active",
+      "gender": "male",
+      "tags": [
+        "bollywood",
+        "actor"
+      ],
+      "created_at": "2026-09-25T17:55:56.617350+00:00"
+    },
+    "leonardo_dicaprio": {
+      "celebrity_key": "leonardo_dicaprio",
+      "celebrity_name": "Leonardo DiCaprio",
+      "image_path": "dataset/leonardo_dicaprio.jpg",
+      "image_filename": "leonardo_dicaprio.jpg",
+      "embedding_path": "embedding/leonardo_dicaprio.npy",
+      "status": "active",
+      "gender": "male",
+      "tags": [
+        "hollywood",
+        "actor"
+      ],
+      "created_at": "2026-09-25T17:56:00.884881+00:00"
+    },
+    "ryan_gosling": {
+      "celebrity_key": "ryan_gosling",
+      "celebrity_name": "Ryan Gosling",
+      "image_path": "dataset/ryan_gosling.jpg",
+      "image_filename": "ryan_gosling.jpg",
+      "embedding_path": "embedding/ryan_gosling.npy",
+      "status": "active",
+      "gender": "male",
+      "tags": [
+        "hollywood",
+        "actor"
+      ],
+      "created_at": "2026-09-25T17:56:04.626653+00:00"
+    },
+    "emma_watson": {
+      "celebrity_key": "emma_watson",
+      "celebrity_name": "Emma Watson",
+      "image_path": "dataset/emma_watson.jpg",
+      "image_filename": "emma_watson.jpg",
+      "embedding_path": "embedding/emma_watson.npy",
+      "status": "active",
+      "gender": "female",
+      "tags": [
+        "hollywood",
+        "actress"
+      ],
+      "created_at": "2026-09-25T17:56:07.427573+00:00"
+    },
+    "zendaya": {
+      "celebrity_key": "zendaya",
+      "celebrity_name": "Zendaya",
+      "image_path": "dataset/zendaya.jpg",
+      "image_filename": "zendaya.jpg",
+      "embedding_path": "embedding/zendaya.npy",
+      "status": "active",
+      "gender": "female",
+      "tags": [
+        "hollywood",
+        "actress"
+      ],
+      "created_at": "2026-09-25T17:56:10.858794+00:00"
+    }
+  }
+}

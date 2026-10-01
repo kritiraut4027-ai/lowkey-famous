@@ -1,16 +1,41 @@
-#virtual environment
+# Python Virtual Environment
 venv/
-#python cache
+env/
+.venv/
+
+# Byte-compiled / optimized / DLL files
 __pycache__/
-*.pyc
-#dataset files
-dataset/
-#embedding
-embeddings/
-venv/
-#environment varaible
+*.py[cod]
+*$py.class
+*.pyd
+
+# Temporary Uploads (keep directory via .gitkeep, ignore uploaded files)
+uploads/*
+!uploads/.gitkeep
+
+# Large InsightFace / ONNX Model Cache (downloaded at runtime or Docker build)
+models/
+.insightface/
+scratch/
+scratch_*.py
+
+# Test artifacts and local shortcuts
+test_images/*
+!test_images/.gitkeep
+validation_reports/
+temp_downloads/
+*.lnk
+
+# Environment variables & secrets
+.env
 .environment
-#vs code setting
+*.env.local
+
+# IDE & Editor configurations
 .vscode/
-#jupyter cache
+.idea/
 .ipynb_checkpoints/
+
+# OS-generated files
+.DS_Store
+Thumbs.db

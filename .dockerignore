@@ -1,0 +1,40 @@
+# Virtual environments
+venv/
+env/
+.venv/
+
+# Git and IDE metadata
+.git
+.gitignore
+.vscode/
+.idea/
+.DS_Store
+
+# Python caches and bytecode
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Temporary uploads (keep directory via .gitkeep)
+uploads/*
+!uploads/.gitkeep
+
+# Temporary and test directories
+temp_downloads/
+test_images/
+validation_reports/
+scratch/
+scratch_*.py
+
+# Test scripts and verification suites
+test_suite.py
+verify_production_pipeline.py
+
+# Documentation not needed inside container
+*.md
+
+# OS and log files
+*.lnk
+*.log
+

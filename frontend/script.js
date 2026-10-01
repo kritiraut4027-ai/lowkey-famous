@@ -210,21 +210,30 @@
        // }
      }
      --------------------------------------------------------- */
-  async function fetchFaceMatch(file) {
+  // Configurable API base URL: empty string uses relative paths (unified deployment)
+  const isLocalDevHost = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1";
+  const API_BASE = (typeof window.API_BASE_URL !== "undefined" && window.API_BASE_URL)
+    ? window.API_BASE_URL.replace(/\/$/, "")
+    : (window.location.protocol === "file:" || (isLocalDevHost && window.location.port && window.location.port !== "5000"))
+      ? "http://127.0.0.1:5000"
+      : "";
 
+  async function fetchFaceMatch(file) {
     const formData = new FormData();
     formData.append("image", file);
 
-    const response = await fetch(
-        "http://127.0.0.1:5000/upload",
-        {
-            method: "POST",
-            body: formData
-        }
-    );
+    const uploadUrl = API_BASE ? `${API_BASE}/upload` : "/upload";
+    const response = await fetch(uploadUrl, {
+      method: "POST",
+      body: formData,
+    });
 
-    return await response.json();
-}   
+    const data = await response.json().catch(() => null);
+    if (!data) {
+      throw new Error("Invalid response from server");
+    }
+    return data;
+  }   
   /*function mockFaceMatchRequest() {
     // Small demo roster so the UI has something believable to render.
     // Swap this out entirely once the real API is wired up.
@@ -300,10 +309,24 @@
         );
         return;
       }
+      if (response.status === "invalid_image") {
+        showError(
+          "Invalid Image",
+          response.error || "The uploaded image could not be processed. Please upload a clear JPG, PNG, or WEBP photo."
+        );
+        return;
+      }
       if (response.status === "no_match") {
         showError(
           "No Close Match Found",
           "We compared your face against our database but couldn't find a confident celebrity match. Try a different photo."
+        );
+        return;
+      }
+      if (response.status !== "ok") {
+        showError(
+          "Matching Error",
+          response.error || "An unexpected error occurred while analyzing the face. Please try again."
         );
         return;
       }
@@ -328,8 +351,14 @@
     errorSection.hidden = true;
     resultSection.hidden = false;
 
-    resultUserImg.src =  "http://127.0.0.1:5000" + data.user_image_url;
-    resultCelebImg.src = "http://127.0.0.1:5000" + data.celebrity_image_url;
+    // Display user image from local data URL (instant, no extra network roundtrip)
+    resultUserImg.src = selectedFileDataUrl || (data.user_image_url.startsWith("http") ? data.user_image_url : `${API_BASE}${data.user_image_url}`);
+    
+    // Display celebrity match image
+    resultCelebImg.src = data.celebrity_image_url.startsWith("http")
+      ? data.celebrity_image_url
+      : `${API_BASE}${data.celebrity_image_url}`;
+    
     celebName.textContent = data.celebrity_name;
 
     animateMatchRing(data.match_percentage);
