@@ -5,14 +5,14 @@ gunicorn==26.0.0
 Werkzeug==3.1.8
 
 # Core ML & Face Recognition Engine
-numpy==2.5.1
+numpy==2.2.6
 opencv-python-headless==4.10.0.84
 onnx==1.22.0
 onnxruntime==1.27.0
 insightface==1.0.1
 
 # InsightFace Required Dependencies
-scipy==1.18.0
+scipy==1.17.1
 scikit-image==0.26.0
 requests==2.34.2
 tqdm==4.68.4
