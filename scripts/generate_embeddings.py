@@ -47,7 +47,7 @@ def get_face_analyzer():
     from insightface.app import FaceAnalysis
 
     models_root = os.environ.get("INSIGHTFACE_ROOT", os.path.expanduser("~/.insightface"))
-    model_name = os.environ.get("INSIGHTFACE_MODEL_NAME", "buffalo_l")
+    model_name = os.environ.get("INSIGHTFACE_MODEL_NAME", "buffalo_s")
 
     print(f"[Embedding Gen] Initializing FaceAnalysis ({model_name}) on CPU...")
     app = FaceAnalysis(
@@ -56,8 +56,7 @@ def get_face_analyzer():
         allowed_modules=["detection", "recognition"],
         providers=["CPUExecutionProvider"]
     )
-    # det_size=None preserves exact alignment consistency with pre-computed vectors
-    app.prepare(ctx_id=-1)
+    app.prepare(ctx_id=-1, det_size=(640, 640))
     return app
 
 

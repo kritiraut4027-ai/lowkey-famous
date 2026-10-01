@@ -8,7 +8,8 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
     HOST=0.0.0.0 \
     OMP_NUM_THREADS=1 \
     OPENBLAS_NUM_THREADS=1 \
-    INSIGHTFACE_ROOT=/root/.insightface
+    INSIGHTFACE_ROOT=/root/.insightface \
+    INSIGHTFACE_MODEL_NAME=buffalo_s
 
 # Install minimal OS dependencies for ONNX Runtime and OpenCV (headless & X11 fallback libraries)
 RUN apt-get update && apt-get install -y --no-install-recommends \
@@ -31,19 +32,21 @@ RUN pip install --no-cache-dir -r requirements.txt && \
     (pip uninstall -y opencv-python || true) && \
     pip install --no-cache-dir --force-reinstall opencv-python-headless==4.10.0.84
 
-# Pre-download InsightFace buffalo_l models during build to avoid cold-start runtime latency
-# Restrict allowed modules and delete unneeded 3D/landmark models and the zip to keep image small
+# Copy application source code, dataset, and scripts before pre-computing embeddings
+COPY . .
+
+# Pre-download lightweight buffalo_s models (MobileFaceNet ~14 MB vs ResNet50 ~250 MB)
+# Recompute embeddings for 21 baseline celebrities during build (Render build has ample RAM)
+# Delete unneeded 3D/landmark models and zip to minimize image footprint
 RUN python -c "\
 from insightface.app import FaceAnalysis; \
-app = FaceAnalysis(name='buffalo_l', allowed_modules=['detection', 'recognition'], providers=['CPUExecutionProvider']); \
-app.prepare(ctx_id=-1)" && \
-    rm -f /root/.insightface/models/buffalo_l.zip \
-          /root/.insightface/models/buffalo_l/1k3d68.onnx \
-          /root/.insightface/models/buffalo_l/2d106det.onnx \
-          /root/.insightface/models/buffalo_l/genderage.onnx
-
-# Copy application source code
-COPY . .
+app = FaceAnalysis(name='buffalo_s', allowed_modules=['detection', 'recognition'], providers=['CPUExecutionProvider']); \
+app.prepare(ctx_id=-1, det_size=(640, 640))" && \
+    python scripts/generate_embeddings.py --all --force && \
+    rm -f /root/.insightface/models/buffalo_s.zip \
+          /root/.insightface/models/buffalo_s/1k3d68.onnx \
+          /root/.insightface/models/buffalo_s/2d106det.onnx \
+          /root/.insightface/models/buffalo_s/genderage.onnx
 
 # Ensure upload directory exists
 RUN mkdir -p /app/uploads

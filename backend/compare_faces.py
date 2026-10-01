@@ -98,7 +98,7 @@ def get_face_analyzer():
 
         # InsightFace root directory configurable via environment variable
         models_root = os.environ.get("INSIGHTFACE_ROOT", os.path.expanduser("~/.insightface"))
-        model_name = os.environ.get("INSIGHTFACE_MODEL_NAME", "buffalo_l")
+        model_name = os.environ.get("INSIGHTFACE_MODEL_NAME", "buffalo_s")
 
         analyzer = FaceAnalysis(
             name=model_name,
